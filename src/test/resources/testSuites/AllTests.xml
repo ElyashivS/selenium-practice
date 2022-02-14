@@ -13,7 +13,7 @@
         </classes>
     </test>
 
-    <test name="negativeTests">
+    <test name="NegativeTests">
         <parameter name="phoneNumber" value="aaa"/>
         <groups>
             <run>
@@ -25,7 +25,7 @@
         </classes>
     </test>
 
-    <test name="invalidPhoneNumberBBB">
+    <test name="InvalidPhoneNumberBBB">
         <parameter name="phoneNumber" value="bbb"/>
         <classes>
             <class name="test.java.NegativeTests">
