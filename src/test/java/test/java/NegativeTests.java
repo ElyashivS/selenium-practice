@@ -46,8 +46,6 @@ public class NegativeTests {
         WebElement sendReqElement = driver.findElement(By.cssSelector(".hs-button.primary.large"));
         sendReqElement.click();
 
-        // Sleep for 3 seconds
-        sleep(3000);
 
         // Verifications
         WebElement firstNameVerString = driver.findElement(By.xpath("(//label[@class='hs-error-msg'])[1]"));
