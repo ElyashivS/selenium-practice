@@ -3,36 +3,36 @@
 <suite name="AllTestsSuite" parallel="tests" verbose="1">
 
     <test name="PositiveTests">
-        <groups>
-            <run>
-                <include name="positiveTests"/>
-            </run>
-        </groups>
+<!--        <groups>-->
+<!--            <run>-->
+<!--                <include name="positiveTests"/>-->
+<!--            </run>-->
+<!--        </groups>-->
         <classes>
             <class name="test.java.PositiveTests"/>
         </classes>
     </test>
 
-    <test name="NegativeTests">
-        <parameter name="phoneNumber" value="aaa"/>
-        <groups>
-            <run>
-                <include name="negativeTests"/>
-            </run>
-        </groups>
-        <classes>
-            <class name="test.java.NegativeTests"/>
-        </classes>
-    </test>
+<!--    <test name="NegativeTests">-->
+<!--        <parameter name="phoneNumber" value="aaa"/>-->
+<!--        <groups>-->
+<!--            <run>-->
+<!--                <include name="negativeTests"/>-->
+<!--            </run>-->
+<!--        </groups>-->
+<!--        <classes>-->
+<!--            <class name="test.java.NegativeTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="InvalidPhoneNumberBBB">
-        <parameter name="phoneNumber" value="bbb"/>
-        <classes>
-            <class name="test.java.NegativeTests">
-                <methods>
-                    <exclude name="emptyFirstName"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="InvalidPhoneNumberBBB">-->
+<!--        <parameter name="phoneNumber" value="bbb"/>-->
+<!--        <classes>-->
+<!--            <class name="test.java.NegativeTests">-->
+<!--                <methods>-->
+<!--                    <exclude name="emptyFirstName"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>
