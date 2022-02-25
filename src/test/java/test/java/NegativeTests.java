@@ -10,109 +10,80 @@ import org.testng.annotations.Test;
 
 public class NegativeTests {
 
-    @Test(groups = {"negativeTests", "firstNameTest"})
-    public void emptyFirstName() {
-        System.out.println("Starting Empty First Name test");
+    @Test(groups = {"negativeTests", "smokeTests"})
+    public void emptyUsername() {
+        System.out.println("Starting empty Username test");
 
         System.setProperty("webdriver.chrome.driver", "C:/webdrivers/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
 
         // Open test page
-        String url = "https://qualitestgroup.com/contact-us/";
+        String url = "https://parabank.parasoft.com/";
         driver.get(url);
-
         // Maximize browser window
         driver.manage().window().maximize();
         System.out.println("Contact Us page opened.");
 
-        // Fill Last Name, Company name, Phone, Email and Location
-        WebElement lastNameElement = driver.findElement(By.id("lastname-34dd68e0-b077-4e95-9243-b861f3f2fd7d"));
-        lastNameElement.sendKeys("Someone last name");
-        WebElement companyNameElement = driver.findElement(By.id("company-34dd68e0-b077-4e95-9243-b861f3f2fd7d"));
-        companyNameElement.sendKeys("Someone company");
-        WebElement phoneNumberElement = driver.findElement(By.id("phone-34dd68e0-b077-4e95-9243-b861f3f2fd7d"));
-        phoneNumberElement.sendKeys("0500000000");
-        WebElement careerTalkAbtElement = driver.findElement(By.id("what_would_you_like_to_talk_about_1-34dd68e0-b077-4e95-9243-b861f3f2fd7d"));
-        careerTalkAbtElement.click();
-        WebElement emailElement = driver.findElement(By.id("secondary_email__c-34dd68e0-b077-4e95-9243-b861f3f2fd7d"));
-        emailElement.sendKeys("A7X@gmail.com");
-        WebElement locationAsiaElement = driver.findElement(By.xpath("(//option[@value='Asia'])"));
-        locationAsiaElement.click();
-
-        // Sleep for 2 seconds
-        sleep(2000);
-
-        // Click SEND REQUEST
-        WebElement sendReqElement = driver.findElement(By.cssSelector(".hs-button.primary.large"));
-        sendReqElement.click();
-
+        // Fill Username without password and click login
+        WebElement usernameElement = driver.findElement(By.cssSelector("#loginPanel > form > div:nth-child(2) > input"));
+        usernameElement.sendKeys("Extreme72");
+        WebElement logInBtnElement = driver.findElement(By.cssSelector("#loginPanel > form > div:nth-child(5) > input"));
+        logInBtnElement.click();
 
         // Verifications
-        WebElement firstNameVerString = driver.findElement(By.xpath("(//label[@class='hs-error-msg'])[1]"));
-        String firNameActErr = firstNameVerString.getText();
-        String firNameExpErr = "Please complete this required field.";
-        Assert.assertTrue(firNameActErr.contains(firNameExpErr),
-                "Actual error message does not contain expected. \nActual: "
-                        + firNameActErr + "\nExpected: "
-                        + firNameExpErr);
+        String actVerificationText = driver.findElement(By.cssSelector("#rightPanel")).getAttribute("innerText");
+        String expVerificationText = """
+                Error!
 
-        // Sleep for 3 seconds
-        sleep(3000);
+                An internal error has occurred and has been logged.""";
+        String expVerificationText2 = """
+                Error!
+                
+                Please enter a username and password.""";
 
+        Assert.assertTrue(actVerificationText.equals(expVerificationText) ||
+                        actVerificationText.equals(expVerificationText2));
         driver.quit();
     }
 
-    @Test(groups = {"negativeTests", "phoneNumberTest"})
-    @Parameters({"phoneNumber"})
-    public void invalidPhoneNumber(String phoneNumber) {
-        System.out.println("Starting invalid phone number test");
+    @Test(groups = {"negativeTests", "smokeTests"})
+    @Parameters({"password"})
+    public void incorrectPassword(String password) {
+        System.out.println("Starting Incorrect Password test");
 
         System.setProperty("webdriver.chrome.driver", "C:/webdrivers/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
 
         // Open test page
-        String url = "https://qualitestgroup.com/contact-us/";
+        String url = "https://parabank.parasoft.com/";
         driver.get(url);
-
         // Maximize browser window
         driver.manage().window().maximize();
-        System.out.println("Contact Us page opened.");
+        System.out.println("ParaBank main page opened.");
 
-        // Fill First Name, Last Name, Company name, Email and Location
-        WebElement firstNameElement = driver.findElement(By.id("firstname-34dd68e0-b077-4e95-9243-b861f3f2fd7d"));
-        firstNameElement.sendKeys("Someone first name");
-        WebElement lastNameElement = driver.findElement(By.id("lastname-34dd68e0-b077-4e95-9243-b861f3f2fd7d"));
-        lastNameElement.sendKeys("Someone last name");
-        WebElement companyNameElement = driver.findElement(By.id("company-34dd68e0-b077-4e95-9243-b861f3f2fd7d"));
-        companyNameElement.sendKeys("Someone company");
-        WebElement careerTalkAbtElement = driver.findElement(By.id("what_would_you_like_to_talk_about_1-34dd68e0-b077-4e95-9243-b861f3f2fd7d"));
-        careerTalkAbtElement.click();
-        WebElement emailElement = driver.findElement(By.id("secondary_email__c-34dd68e0-b077-4e95-9243-b861f3f2fd7d"));
-        emailElement.sendKeys("A7X@gmail.com");
-        WebElement locationAsiaElement = driver.findElement(By.xpath("(//option[@value='Asia'])"));
-        locationAsiaElement.click();
+        // Fill Username and incorrect password, and click login
+        WebElement usernameElement = driver.findElement(By.cssSelector("#loginPanel > form > div:nth-child(2) > input"));
+        usernameElement.sendKeys("Extreme72");
+        WebElement passElement = driver.findElement(By.cssSelector("#loginPanel > form > div:nth-child(4) > input"));
+        passElement.sendKeys(password);
+        WebElement logInBtnElement = driver.findElement(By.cssSelector("#loginPanel > form > div:nth-child(5) > input"));
+        logInBtnElement.click();
 
-        // Fill invalid phone number
-        WebElement phoneNumberElement = driver.findElement(By.id("phone-34dd68e0-b077-4e95-9243-b861f3f2fd7d"));
-        phoneNumberElement.sendKeys(phoneNumber); // The invalid input is "aaa", and then "bbb"
+        // Verification
+        String actVerificationText = driver.findElement(By.cssSelector("#rightPanel")).getAttribute("innerText");
+        String expVerificationText = """
+                Error!
 
+                An internal error has occurred and has been logged.""";
+        String expVerificationText2 = """
+                Error!
+                                
+                The username and password could not be verified.""";
 
-        // Click SEND REQUEST
-        WebElement sendReqElement = driver.findElement(By.cssSelector(".hs-button.primary.large"));
-        sendReqElement.click();
+        Assert.assertTrue(actVerificationText.equals(expVerificationText) ||
+                        actVerificationText.equals(expVerificationText2));
 
-        // Verifications
-        WebElement phoneNumVerString = driver.findElement(By.xpath("(//label[@class='hs-error-msg'])[1]"));
-        String phoneNumActErr = phoneNumVerString.getText();
-        String phoneNumExpErr = "Must contain only numbers, +()-. and x.";
-        Assert.assertTrue(phoneNumActErr.contains(phoneNumExpErr),
-                "Actual error message does not contain expected. \nActual: "
-                        + phoneNumActErr + "\nExpected: "
-                        + phoneNumExpErr);
-
-        // Sleep for 3 seconds
-        sleep(3000);
-
+        // Close browser
         driver.quit();
     }
 
