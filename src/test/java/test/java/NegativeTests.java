@@ -43,6 +43,8 @@ public class NegativeTests {
 
         Assert.assertTrue(actVerificationText.equals(expVerificationText) ||
                         actVerificationText.equals(expVerificationText2));
+
+        // Closer browser
         driver.quit();
     }
 

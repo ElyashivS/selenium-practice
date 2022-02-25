@@ -61,7 +61,7 @@ public class PositiveTests {
                 actExistErr.equals(expExistErrText));
 
         // Close browser
-//        driver.quit();
+        driver.quit();
     }
 
     @Test(groups = {"positiveTests", "smokeTests"})
