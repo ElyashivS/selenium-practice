@@ -2,42 +2,42 @@
 
 <suite name="AllTestsSuite" parallel="tests" verbose="1">
 
-<!--    <test name="PositiveTests">-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="positiveTests"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="test.java.PositiveTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-<!--    <test name="NegativeTests">-->
-<!--        <parameter name="phoneNumber" value="aaa"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="negativeTests"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="test.java.NegativeTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-    <test name="incorrectPasswordTest1">
-        <parameter name="password" value="incorrect_password1"/>
+    <test name="PositiveTests">
         <classes>
-            <class name="test.java.NegativeTests">
+            <class name="test.java.PositiveTests"/>
+        </classes>
+    </test>
+
+    <test name="emptyUsername">
+        <classes>
+            <class name="test.java.PositiveTests">
+                <methods>
+                    <include name="emptyUsername"/>
+                </methods>
             </class>
         </classes>
     </test>
 
-<!--    <test name="incorrectPasswordTest2">-->
-<!--        <parameter name="password" value="incorrect_password2"/>-->
-<!--        <classes>-->
-<!--            <class name="test.java.NegativeTests">-->
-<!--            </class>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="incorrectPassword1">
+        <classes>
+            <class name="test.java.NegativeTests">
+                <methods>
+                    <parameter name="password" value="incorrect_password"/>
+                    <include name="incorrectPassword"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="incorrectPassword2">
+        <classes>
+            <class name="test.java.NegativeTests">
+                <methods>
+                    <parameter name="password" value="other_incorrect"/>
+                    <include name="incorrectPassword"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
 </suite>
