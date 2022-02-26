@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 public class PositiveTests {
 
-    @Test(groups = {"positiveTests", "smokeTests"})
+    @Test(groups = {"positiveTests", "smokeTests"}, priority = 1)
     public void register() {
         System.out.println("Starting register test");
 
@@ -64,7 +64,7 @@ public class PositiveTests {
         driver.quit();
     }
 
-    @Test(groups = {"positiveTests", "smokeTests"})
+    @Test(groups = {"positiveTests", "smokeTests"}, priority = 2)
     public void login() {
         System.out.println("Starting login test");
 
@@ -98,7 +98,7 @@ public class PositiveTests {
         driver.quit();
     }
 
-    @Test
+    @Test(groups = {"positiveTests", "smokeTests"})
     public void contact() {
         System.out.println("Starting contact test");
 
