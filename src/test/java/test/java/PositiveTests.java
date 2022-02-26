@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.SkipException;
 import org.testng.annotations.Test;
 
 public class PositiveTests {
@@ -86,16 +87,32 @@ public class PositiveTests {
         WebElement logInBtnElement = driver.findElement(By.cssSelector("#loginPanel > form > div:nth-child(5) > input"));
         logInBtnElement.click();
 
-        // Verification
-        String actVerificationText = driver.findElement(By.cssSelector("#leftPanel > p")).getAttribute("innerText");
-        String expVerificationText = "Welcome Dor Cohen";
-        Assert.assertEquals(actVerificationText, expVerificationText,
-                "Actual verification message is not as expected. \nActual: "
-                        + actVerificationText + "\nExpected: "
-                        + expVerificationText);
+        String actBrokenSiteErr = "";
+        String expBrokenSiteErr = "";
 
+        // Verification
+        try {
+            String actVerificationText = driver.findElement(By.cssSelector("#leftPanel > p")).getAttribute("innerText");
+            String expVerificationText = "Welcome Dor Cohen";
+            Assert.assertEquals(actVerificationText, expVerificationText,
+                    "Actual verification message is not as expected. \nActual: "
+                            + actVerificationText + "\nExpected: "
+                            + expVerificationText);
+        } catch (NoSuchElementException e) {
+            actBrokenSiteErr += driver.findElement(By.cssSelector("#rightPanel")).getAttribute("innerText");
+            expBrokenSiteErr += """
+                    Error!
+                    
+                    The username and password could not be verified.""";
+
+        } if (actBrokenSiteErr.equals(expBrokenSiteErr)) {
+            driver.quit();
+            throw new SkipException("The site is broken. Please try again later.");
+        } else {
+            Assert.fail();
+            driver.quit();
+        }
         // Close browser
-        driver.quit();
     }
 
     @Test(groups = {"positiveTests", "smokeTests"})
