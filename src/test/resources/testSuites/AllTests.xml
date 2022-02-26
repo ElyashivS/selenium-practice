@@ -2,41 +2,27 @@
 
 <suite name="AllTestsSuite" parallel="tests" verbose="1">
 
-    <test name="PositiveTests">
-        <classes>
-            <class name="test.java.PositiveTests"/>
-        </classes>
-    </test>
+        <test name="PositiveTests">
+            <classes>
+                <class name="test.java.PositiveTests"/>
+            </classes>
+        </test>
 
-    <test name="emptyUsername">
-        <classes>
-            <class name="test.java.PositiveTests">
-                <methods>
-                    <include name="emptyUsername"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="incorrectPassword1">
+    <test name="otherPassInParam">
+        <parameter name="password" value="222"/>
         <classes>
             <class name="test.java.NegativeTests">
                 <methods>
-                    <parameter name="password" value="incorrect_password"/>
                     <include name="incorrectPassword"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <test name="incorrectPassword2">
+    <test name="negativeTests">
+        <parameter name="password" value="111"/>
         <classes>
-            <class name="test.java.NegativeTests">
-                <methods>
-                    <parameter name="password" value="other_incorrect"/>
-                    <include name="incorrectPassword"/>
-                </methods>
-            </class>
+            <class name="test.java.NegativeTests"/>
         </classes>
     </test>
 
