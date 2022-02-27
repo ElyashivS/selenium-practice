@@ -87,8 +87,6 @@ public class PositiveTests {
         WebElement logInBtnElement = driver.findElement(By.cssSelector("#loginPanel > form > div:nth-child(5) > input"));
         logInBtnElement.click();
 
-        String actBrokenSiteErr = "";
-        String expBrokenSiteErr = "";
 
         // Verification
         try {
@@ -99,20 +97,22 @@ public class PositiveTests {
                             + actVerificationText + "\nExpected: "
                             + expVerificationText);
         } catch (NoSuchElementException e) {
-            actBrokenSiteErr += driver.findElement(By.cssSelector("#rightPanel")).getAttribute("innerText");
-            expBrokenSiteErr += """
+            String actBrokenSiteErr;
+            String expBrokenSiteErr;
+            actBrokenSiteErr = driver.findElement(By.cssSelector("#rightPanel")).getAttribute("innerText");
+            expBrokenSiteErr = """
                     Error!
-                    
+                                        
                     The username and password could not be verified.""";
-
-        } if (actBrokenSiteErr.equals(expBrokenSiteErr)) {
-            driver.quit();
-            throw new SkipException("The site is broken. Please try again later.");
-        } else {
-            Assert.fail();
-            driver.quit();
+            if (actBrokenSiteErr.equals(expBrokenSiteErr)) {
+                driver.quit();
+                throw new SkipException("The site is broken. Please try again later.");
+            } else {
+                Assert.fail();
+            }
         }
         // Close browser
+        driver.quit();
     }
 
     @Test(groups = {"positiveTests", "smokeTests"})
