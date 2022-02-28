@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="AllTestsSuite" parallel="instances" verbose="1">
+<suite name="AllTestsSuite" parallel="tests" verbose="1">
 
     <test name="PositiveTests">
         <classes>
