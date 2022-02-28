@@ -1,0 +1,124 @@
+{
+	"info": {
+		"_postman_id": "4bbf3c5d-0d04-404e-badd-be959f3777c1",
+		"name": "First",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Account by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://parabank.parasoft.com/parabank/services/bank/accounts/13788",
+					"protocol": "https",
+					"host": [
+						"parabank",
+						"parasoft",
+						"com"
+					],
+					"path": [
+						"parabank",
+						"services",
+						"bank",
+						"accounts",
+						"13788"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deposit funds",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://parabank.parasoft.com/parabank/services/bank/deposit?accountId=14010&amount=10000",
+					"protocol": "https",
+					"host": [
+						"parabank",
+						"parasoft",
+						"com"
+					],
+					"path": [
+						"parabank",
+						"services",
+						"bank",
+						"deposit"
+					],
+					"query": [
+						{
+							"key": "accountId",
+							"value": "14010"
+						},
+						{
+							"key": "amount",
+							"value": "10000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Withdraw funds",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://parabank.parasoft.com/parabank/services/bank/withdraw?accountId=14010&amount=5000",
+					"protocol": "https",
+					"host": [
+						"parabank",
+						"parasoft",
+						"com"
+					],
+					"path": [
+						"parabank",
+						"services",
+						"bank",
+						"withdraw"
+					],
+					"query": [
+						{
+							"key": "accountId",
+							"value": "14010"
+						},
+						{
+							"key": "amount",
+							"value": "5000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get the list of Transactions for the account",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://parabank.parasoft.com/parabank/services/bank/accounts/14010/transactions",
+					"protocol": "https",
+					"host": [
+						"parabank",
+						"parasoft",
+						"com"
+					],
+					"path": [
+						"parabank",
+						"services",
+						"bank",
+						"accounts",
+						"14010",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
