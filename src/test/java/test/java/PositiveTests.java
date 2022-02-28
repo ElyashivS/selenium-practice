@@ -1,23 +1,46 @@
 package test.java;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.SkipException;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class PositiveTests {
 
-    @Test(groups = {"positiveTests", "smokeTests"}, priority = 1)
+    @BeforeSuite
+    public void before_suite() {
+        System.out.println("Starting set up");
+        String driverLocation = "";
+        // Read from JSON
+        Object jp;
+        try {
+            jp = new JSONParser().parse(new FileReader("src/config/config.json"));
+            JSONObject jo = (JSONObject) jp;
+            driverLocation += (String) jo.get("chromeDriverLocation");
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+
+        System.setProperty("webdriver.chrome.driver", driverLocation);
+    }
+
+    @Test(groups = {"positiveTests", "smokeTests"}, priority = -1)
     public void register() {
         System.out.println("Starting register test");
 
-        System.setProperty("webdriver.chrome.driver", "C:/webdrivers/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
-
         // Open test page
         String url = "https://parabank.parasoft.com/parabank/register.htm";
         driver.get(url);
@@ -65,11 +88,10 @@ public class PositiveTests {
         driver.quit();
     }
 
-    @Test(groups = {"positiveTests", "smokeTests"}, priority = 2)
+    @Test(groups = {"positiveTests", "smokeTests"})
     public void login() {
         System.out.println("Starting login test");
 
-        System.setProperty("webdriver.chrome.driver", "C:/webdrivers/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
 
         // Open test page
@@ -105,10 +127,7 @@ public class PositiveTests {
                                         
                     The username and password could not be verified.""";
             if (actBrokenSiteErr.equals(expBrokenSiteErr)) {
-                driver.quit();
-                throw new SkipException("The site is broken. Please try again later.");
-            } else {
-                Assert.fail();
+                Assert.fail("Site is broken. Test failed.");
             }
         }
         // Close browser
@@ -119,7 +138,6 @@ public class PositiveTests {
     public void contact() {
         System.out.println("Starting contact test");
 
-        System.setProperty("webdriver.chrome.driver", "C:/webdrivers/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
 
         // Open test page
@@ -150,6 +168,70 @@ public class PositiveTests {
 
         // Close browser
         driver.quit();
+    }
+
+    @Test
+    public void requestLoad() {
+        System.out.println("Starting request load test");
+
+        WebDriver driver = new ChromeDriver();
+
+        // Open test page
+        String url = "https://parabank.parasoft.com/";
+        driver.get(url);
+        // Maximize browser window
+        driver.manage().window().maximize();
+        System.out.println("ParaBank request load page opened.");
+
+        String loanAmount = "";
+        String downPayment = "";
+
+        // Read from JSON
+        Object jp;
+        try {
+            jp = new JSONParser().parse(new FileReader("src/config/params.json"));
+            JSONObject jo = (JSONObject) jp;
+            loanAmount += (String) jo.get("loanAmount");
+            downPayment += (String) jo.get("downPayment");
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        // Fill login fields, and click login
+        driver.findElement(By.cssSelector("#loginPanel > form > div:nth-child(2) > input")).sendKeys("Extreme72");
+        driver.findElement(By.cssSelector("#loginPanel > form > div:nth-child(4) > input")).sendKeys("qwe123");
+        driver.findElement(By.cssSelector("#loginPanel > form > div:nth-child(5) > input")).click();
+
+        driver.get("https://parabank.parasoft.com/parabank/requestloan.htm");
+
+        driver.findElement(By.id("amount")).sendKeys(loanAmount);
+        driver.findElement(By.id("downPayment")).sendKeys(downPayment);
+        driver.findElement(By.xpath("(//input[@type='submit'])")).click();
+
+        // Verification
+        sleep(1000);
+        String actVerificationText = driver.findElement(By.xpath("(//div[@class='ng-scope'])[3]"))
+                .getAttribute("innerText");
+        String expVerificationText = "Congratulations, your loan has been approved.";
+        Assert.assertTrue(actVerificationText.contains(expVerificationText),
+                "Actual verification message is not as expected. \nActual: "
+                        + actVerificationText + "\nExpected: "
+                        + expVerificationText);
+
+        // Close browser
+        driver.quit();
+    }
+
+    @Test
+    public void responseTest() {
+        try {
+            URL url = new URL("https://parabank.parasoft.com/parabank/services/bank/accounts/13788");
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            Assert.assertEquals(con.getResponseCode(), 200);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void sleep(long m) {
