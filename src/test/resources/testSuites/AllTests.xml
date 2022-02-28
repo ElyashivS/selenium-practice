@@ -1,12 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="AllTestsSuite" parallel="tests" verbose="1">
+<suite name="AllTestsSuite" parallel="instances" verbose="1">
 
-        <test name="PositiveTests">
-            <classes>
-                <class name="test.java.PositiveTests"/>
-            </classes>
-        </test>
+    <test name="PositiveTests">
+        <classes>
+            <class name="test.java.PositiveTests"/>
+        </classes>
+    </test>
 
     <test name="otherPassInParam">
         <parameter name="password" value="222"/>
