@@ -19,16 +19,24 @@ import java.net.URL;
 
 public class PositiveTests {
 
+    Object configJsonParser;
+    Object paramsJsonParser;
+
+    JSONObject configJsonObject;
+    JSONObject paramsJsonObject;
+
     @BeforeSuite
     public void before_suite() {
         System.out.println("Starting set up");
         String driverLocation = "";
         // Read from JSON
-        Object jp;
         try {
-            jp = new JSONParser().parse(new FileReader("src/config/config.json"));
-            JSONObject jo = (JSONObject) jp;
-            driverLocation += (String) jo.get("chromeDriverLocation");
+            configJsonParser = new JSONParser().parse(new FileReader("src/config/config.json"));
+            configJsonObject = (JSONObject) configJsonParser;
+            driverLocation += (String) configJsonObject.get("chromeDriverLocation");
+
+            paramsJsonParser = new JSONParser().parse(new FileReader("src/config/params.json"));
+            paramsJsonObject = (JSONObject) paramsJsonParser;
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
@@ -48,18 +56,18 @@ public class PositiveTests {
         driver.manage().window().maximize();
         System.out.println("ParaBank main page opened.");
 
-        // Fill login fields, and click register
-        driver.findElement(By.id("customer.firstName")).sendKeys("Dor");
-        driver.findElement(By.id("customer.lastName")).sendKeys("Cohen");
-        driver.findElement(By.id("customer.address.street")).sendKeys("Namir");
-        driver.findElement(By.id("customer.address.city")).sendKeys("Tel Aviv");
-        driver.findElement(By.id("customer.address.state")).sendKeys("Israel");
-        driver.findElement(By.id("customer.address.zipCode")).sendKeys("1234567");
-        driver.findElement(By.id("customer.phoneNumber")).sendKeys("0500000000");
-        driver.findElement(By.id("customer.ssn")).sendKeys("575-82");
-        driver.findElement(By.id("customer.username")).sendKeys("Extreme72");
-        driver.findElement(By.id("customer.password")).sendKeys("qwe123");
-        driver.findElement(By.id("repeatedPassword")).sendKeys("qwe123");
+        // Fill login fields using json, and click register
+        driver.findElement(By.id("customer.firstName")).sendKeys((CharSequence) paramsJsonObject.get("firstName"));
+        driver.findElement(By.id("customer.lastName")).sendKeys((CharSequence) paramsJsonObject.get("lastName"));
+        driver.findElement(By.id("customer.address.street")).sendKeys((CharSequence) paramsJsonObject.get("address.street"));
+        driver.findElement(By.id("customer.address.city")).sendKeys((CharSequence) paramsJsonObject.get("address.city"));
+        driver.findElement(By.id("customer.address.state")).sendKeys((CharSequence) paramsJsonObject.get("address.state"));
+        driver.findElement(By.id("customer.address.zipCode")).sendKeys((CharSequence) paramsJsonObject.get("address.zipCode"));
+        driver.findElement(By.id("customer.phoneNumber")).sendKeys((CharSequence) paramsJsonObject.get("phoneNumber"));
+        driver.findElement(By.id("customer.ssn")).sendKeys((CharSequence) paramsJsonObject.get("ssn"));
+        driver.findElement(By.id("customer.username")).sendKeys((CharSequence) paramsJsonObject.get("username"));
+        driver.findElement(By.id("customer.password")).sendKeys((CharSequence) paramsJsonObject.get("password"));
+        driver.findElement(By.id("repeatedPassword")).sendKeys((CharSequence) paramsJsonObject.get("repeatedPassword"));
         driver.findElement(By.xpath("(//input[@value='Register'])")).click();
         String actVerificationText = "";
         String actExistErr = "";
@@ -81,8 +89,7 @@ public class PositiveTests {
                 Your account was created successfully. You are now logged in.""";
         String expExistErrText = "This username already exists.";
 
-        Assert.assertTrue(actVerificationText.equals(expVerificationText) ||
-                actExistErr.equals(expExistErrText));
+        Assert.assertTrue(actVerificationText.equals(expVerificationText) || actExistErr.equals(expExistErrText));
 
         // Close browser
         driver.quit();
@@ -102,22 +109,15 @@ public class PositiveTests {
         System.out.println("ParaBank main page opened.");
 
         // Fill login fields, and click login
-        WebElement usernameElement = driver.findElement(By.cssSelector("#loginPanel > form > div:nth-child(2) > input"));
-        usernameElement.sendKeys("Extreme72");
-        WebElement passElement = driver.findElement(By.cssSelector("#loginPanel > form > div:nth-child(4) > input"));
-        passElement.sendKeys("qwe123");
-        WebElement logInBtnElement = driver.findElement(By.cssSelector("#loginPanel > form > div:nth-child(5) > input"));
-        logInBtnElement.click();
-
+        driver.findElement(By.cssSelector("#loginPanel > form > div:nth-child(2) > input")).sendKeys((CharSequence) paramsJsonObject.get("username"));
+        driver.findElement(By.cssSelector("#loginPanel > form > div:nth-child(4) > input")).sendKeys((CharSequence) paramsJsonObject.get("password"));
+        driver.findElement(By.cssSelector("#loginPanel > form > div:nth-child(5) > input")).click();
 
         // Verification
         try {
             String actVerificationText = driver.findElement(By.cssSelector("#leftPanel > p")).getAttribute("innerText");
             String expVerificationText = "Welcome Dor Cohen";
-            Assert.assertEquals(actVerificationText, expVerificationText,
-                    "Actual verification message is not as expected. \nActual: "
-                            + actVerificationText + "\nExpected: "
-                            + expVerificationText);
+            Assert.assertEquals(actVerificationText, expVerificationText, "Actual verification message is not as expected. \nActual: " + actVerificationText + "\nExpected: " + expVerificationText);
         } catch (NoSuchElementException e) {
             String actBrokenSiteErr;
             String expBrokenSiteErr;
@@ -158,13 +158,9 @@ public class PositiveTests {
         driver.findElement((By.xpath("(//input[@class='button'])[2]"))).click();
 
         // Verification
-        String actVerificationText = driver.findElement(By.cssSelector("#rightPanel > p:nth-child(2)"))
-                .getAttribute("innerText");
+        String actVerificationText = driver.findElement(By.cssSelector("#rightPanel > p:nth-child(2)")).getAttribute("innerText");
         String expVerificationText = "Thank you Dor Cohen";
-        Assert.assertEquals(actVerificationText, expVerificationText,
-                "Actual verification message is not as expected. \nActual: "
-                        + actVerificationText + "\nExpected: "
-                        + expVerificationText);
+        Assert.assertEquals(actVerificationText, expVerificationText, "Actual verification message is not as expected. \nActual: " + actVerificationText + "\nExpected: " + expVerificationText);
 
         // Close browser
         driver.quit();
@@ -187,20 +183,19 @@ public class PositiveTests {
         String downPayment = "";
 
         // Read from JSON
-        Object jp;
         try {
-            jp = new JSONParser().parse(new FileReader("src/config/params.json"));
-            JSONObject jo = (JSONObject) jp;
-            loanAmount += (String) jo.get("loanAmount");
-            downPayment += (String) jo.get("downPayment");
+            paramsJsonParser = new JSONParser().parse(new FileReader("src/config/params.json"));
+            paramsJsonObject = (JSONObject) paramsJsonParser;
+            loanAmount += (String) paramsJsonObject.get("loanAmount");
+            downPayment += (String) paramsJsonObject.get("downPayment");
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
 
 
         // Fill login fields, and click login
-        driver.findElement(By.cssSelector("#loginPanel > form > div:nth-child(2) > input")).sendKeys("Extreme72");
-        driver.findElement(By.cssSelector("#loginPanel > form > div:nth-child(4) > input")).sendKeys("qwe123");
+        driver.findElement(By.cssSelector("#loginPanel > form > div:nth-child(2) > input")).sendKeys((CharSequence) paramsJsonObject.get("firstName"));
+        driver.findElement(By.cssSelector("#loginPanel > form > div:nth-child(4) > input")).sendKeys((CharSequence) paramsJsonObject.get("password"));
         driver.findElement(By.cssSelector("#loginPanel > form > div:nth-child(5) > input")).click();
 
         driver.get("https://parabank.parasoft.com/parabank/requestloan.htm");
@@ -210,14 +205,10 @@ public class PositiveTests {
         driver.findElement(By.xpath("(//input[@type='submit'])")).click();
 
         // Verification
-        sleep(1000);
-        String actVerificationText = driver.findElement(By.xpath("(//div[@class='ng-scope'])[3]"))
-                .getAttribute("innerText");
+        sleep(); // Sleep for 1 second
+        String actVerificationText = driver.findElement(By.xpath("(//div[@class='ng-scope'])[3]")).getAttribute("innerText");
         String expVerificationText = "Congratulations, your loan has been approved.";
-        Assert.assertTrue(actVerificationText.contains(expVerificationText),
-                "Actual verification message is not as expected. \nActual: "
-                        + actVerificationText + "\nExpected: "
-                        + expVerificationText);
+        Assert.assertTrue(actVerificationText.contains(expVerificationText), "Actual verification message is not as expected. \nActual: " + actVerificationText + "\nExpected: " + expVerificationText);
 
         // Close browser
         driver.quit();
@@ -234,9 +225,9 @@ public class PositiveTests {
         }
     }
 
-    private void sleep(long m) {
+    private void sleep() {
         try {
-            Thread.sleep(m);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
