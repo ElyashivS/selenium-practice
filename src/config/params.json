@@ -1,4 +1,16 @@
 {
+  "firstName": "Dor",
+  "lastName": "Cohen",
+  "address.street": "Namir",
+  "address.city": "Tel Aviv",
+  "address.state": "Israel",
+  "address.zipCode": "1234567",
+  "phoneNumber": "0500000000",
+  "ssn": "575-82",
+  "username": "Extreme72",
+  "password": "qwe123",
+  "repeatedPassword": "qwe123",
+
   "loanAmount": "100",
   "downPayment": "0"
 }
