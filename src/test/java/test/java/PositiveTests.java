@@ -194,7 +194,7 @@ public class PositiveTests {
 
 
         // Fill login fields, and click login
-        driver.findElement(By.cssSelector("#loginPanel > form > div:nth-child(2) > input")).sendKeys((CharSequence) paramsJsonObject.get("firstName"));
+        driver.findElement(By.cssSelector("#loginPanel > form > div:nth-child(2) > input")).sendKeys((CharSequence) paramsJsonObject.get("username"));
         driver.findElement(By.cssSelector("#loginPanel > form > div:nth-child(4) > input")).sendKeys((CharSequence) paramsJsonObject.get("password"));
         driver.findElement(By.cssSelector("#loginPanel > form > div:nth-child(5) > input")).click();
 
