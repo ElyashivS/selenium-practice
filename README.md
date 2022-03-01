@@ -16,4 +16,4 @@ To save the Newman report, type:
 newman run .\src\test\resources\First.postman_collection.json -r htmlextra --reporter-htmlextra-expo
 rt .\src\test\resources
 ```
-It'll be saved in the resources folder
+It'll be saved in the resources folder.
