@@ -24,7 +24,7 @@
     <div class="top-banner-root">
       <span class="top-banner-title-font">Test results</span>
       <br/>
-      <span class="top-banner-font-1">1 suite</span>
+      <span class="top-banner-font-1">1 suite, 2 failed tests</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -38,7 +38,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" panel-name="suite-AllTestsSuite" class="navigator-link">
-              <span class="suite-name border-passed">AllTestsSuite</span>
+              <span class="suite-name border-failed">AllTestsSuite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -91,7 +91,26 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">6 methods,   6 passed</span>
+                    <span class="method-stats">9 methods, 2 failed,   7 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-AllTestsSuite" class="hide-methods failed suite-AllTestsSuite"> (hide)</a> <!-- hide-methods failed suite-AllTestsSuite -->
+                      <a href="#" panel-name="suite-AllTestsSuite" class="show-methods failed suite-AllTestsSuite"> (show)</a> <!-- show-methods failed suite-AllTestsSuite -->
+                    </span>
+                    <div class="method-list-content failed suite-AllTestsSuite">
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-AllTestsSuite" title="test.java.PositiveTests" class="method navigator-link" hash-for-method="login">login</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-AllTestsSuite" title="test.java.PositiveTests" class="method navigator-link" hash-for-method="requestLoad">requestLoad</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-AllTestsSuite -->
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -122,12 +141,17 @@
                       <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-AllTestsSuite" title="test.java.PositiveTests" class="method navigator-link" hash-for-method="login">login</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-AllTestsSuite" title="test.java.PositiveTests" class="method navigator-link" hash-for-method="register">register</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-AllTestsSuite" title="test.java.PositiveTests" class="method navigator-link" hash-for-method="register">register</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-AllTestsSuite" title="test.java.NegativeTests" class="method navigator-link" hash-for-method="responseTest">responseTest</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-AllTestsSuite" title="test.java.PositiveTests" class="method navigator-link" hash-for-method="responseTest">responseTest</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-AllTestsSuite -->
@@ -142,6 +166,63 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-AllTestsSuite" class="panel AllTestsSuite">
+          <div class="suite-AllTestsSuite-class-failed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="failed.png"/>
+              <span class="class-name">test.java.PositiveTests</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="login">
+                  </a> <!-- login -->
+                  <span class="method-name">login</span>
+                  <div class="stack-trace">java.lang.IllegalArgumentException: Keys to send should be a not null CharSequence
+	at org.openqa.selenium.remote.RemoteWebElement.sendKeys(RemoteWebElement.java:97)
+	at test.java.PositiveTests.login(PositiveTests.java:113)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+... Removed 16 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="requestLoad">
+                  </a> <!-- requestLoad -->
+                  <span class="method-name">requestLoad</span>
+                  <div class="stack-trace">org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;#amount&quot;}
+  (Session info: chrome=98.0.4758.82)
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:17:03&apos;
+System info: host: &apos;DESKTOP-D83M5K4&apos;, ip: &apos;192.168.56.1&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;15.0.1&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 98.0.4758.82, chrome: {chromedriverVersion: 97.0.4692.71 (adefa7837d02a..., userDataDir: C:\Users\07DF~1\AppData\Loc...}, goog:chromeOptions: {debuggerAddress: localhost:57733}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 5be1dd677a62841be5c4dfb694bf06d5
+*** Element info: {Using=id, value=amount}
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:372)
+	at org.openqa.selenium.By$ById.findElement(By.java:188)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
+	at test.java.PositiveTests.requestLoad(PositiveTests.java:212)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+... Removed 21 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-AllTestsSuite-class-failed -->
           <div class="suite-AllTestsSuite-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
@@ -157,16 +238,16 @@
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="login">
-                  </a> <!-- login -->
-                  <span class="method-name">login</span>
+                  <a name="register">
+                  </a> <!-- register -->
+                  <span class="method-name">register</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="register">
-                  </a> <!-- register -->
-                  <span class="method-name">register</span>
+                  <a name="responseTest">
+                  </a> <!-- responseTest -->
+                  <span class="method-name">responseTest</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -198,6 +279,13 @@
                   </a> <!-- incorrectPassword(111) -->
                   <span class="method-name">incorrectPassword</span>
                   <span class="parameters">(111)</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="responseTest">
+                  </a> <!-- responseTest -->
+                  <span class="method-name">responseTest</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -328,36 +416,48 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(6);
+data.addRows(9);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'contact')
+data.setCell(0, 1, 'register')
 data.setCell(0, 2, 'test.java.PositiveTests')
-data.setCell(0, 3, 11981);
+data.setCell(0, 3, 14662);
 data.setCell(1, 0, 1)
 data.setCell(1, 1, 'incorrectPassword')
 data.setCell(1, 2, 'test.java.NegativeTests')
-data.setCell(1, 3, 10574);
+data.setCell(1, 3, 13915);
 data.setCell(2, 0, 2)
 data.setCell(2, 1, 'emptyUsername')
 data.setCell(2, 2, 'test.java.NegativeTests')
-data.setCell(2, 3, 10151);
+data.setCell(2, 3, 13776);
 data.setCell(3, 0, 3)
-data.setCell(3, 1, 'register')
+data.setCell(3, 1, 'contact')
 data.setCell(3, 2, 'test.java.PositiveTests')
-data.setCell(3, 3, 6757);
+data.setCell(3, 3, 9342);
 data.setCell(4, 0, 4)
 data.setCell(4, 1, 'incorrectPassword')
 data.setCell(4, 2, 'test.java.NegativeTests')
-data.setCell(4, 3, 6716);
+data.setCell(4, 3, 9050);
 data.setCell(5, 0, 5)
-data.setCell(5, 1, 'login')
+data.setCell(5, 1, 'requestLoad')
 data.setCell(5, 2, 'test.java.PositiveTests')
-data.setCell(5, 3, 5879);
+data.setCell(5, 3, 4959);
+data.setCell(6, 0, 6)
+data.setCell(6, 1, 'login')
+data.setCell(6, 2, 'test.java.PositiveTests')
+data.setCell(6, 3, 4320);
+data.setCell(7, 0, 7)
+data.setCell(7, 1, 'responseTest')
+data.setCell(7, 2, 'test.java.NegativeTests')
+data.setCell(7, 3, 1050);
+data.setCell(8, 0, 8)
+data.setCell(8, 1, 'responseTest')
+data.setCell(8, 2, 'test.java.PositiveTests')
+data.setCell(8, 3, 445);
 window.suiteTableData['AllTestsSuite']= { tableData: data, tableDiv: 'times-div-AllTestsSuite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 52 seconds</span>
+              <span class="suite-total-time">Total running time: 1 minutes</span>
               <div id="times-div-AllTestsSuite">
               </div> <!-- times-div-AllTestsSuite -->
             </div> <!-- times-div -->
@@ -372,13 +472,15 @@ return data;
         </div> <!-- panel -->
         <div panel-name="ignored-methods-AllTestsSuite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">1 ignored method</span>
+            <span class="header-content">2 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="ignored-class-div">
               <span class="ignored-class-name">test.java.NegativeTests</span>
               <div class="ignored-methods-div">
                 <span class="ignored-method-name">emptyUsername</span>
+                <br/>
+                <span class="ignored-method-name">responseTest</span>
                 <br/>
               </div> <!-- ignored-methods-div -->
             </div> <!-- ignored-class-div -->
@@ -390,39 +492,68 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">test.java.NegativeTests</div> <!-- chronological-class-name -->
-              <div class="test-method">
-                <span class="method-name">incorrectPassword(222)</span>
+              <div class="chronological-class-name">test.java.PositiveTests</div> <!-- chronological-class-name -->
+              <div class="configuration-suite before">
+                <span class="method-name">before_suite</span>
                 <span class="method-start">0 ms</span>
-              </div> <!-- test-method -->
+              </div> <!-- configuration-suite before -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">test.java.NegativeTests</div> <!-- chronological-class-name -->
               <div class="test-method">
                 <span class="method-name">emptyUsername</span>
-                <span class="method-start">0 ms</span>
-              </div> <!-- test-method -->
-            </div> <!-- chronological-class -->
-            <div class="chronological-class">
-              <div class="chronological-class-name">test.java.PositiveTests</div> <!-- chronological-class-name -->
-              <div class="test-method">
-                <span class="method-name">contact</span>
-                <span class="method-start">0 ms</span>
-              </div> <!-- test-method -->
-            </div> <!-- chronological-class -->
-            <div class="chronological-class">
-              <div class="chronological-class-name">test.java.NegativeTests</div> <!-- chronological-class-name -->
-              <div class="test-method">
-                <span class="method-name">incorrectPassword(111)</span>
-                <span class="method-start">10154 ms</span>
+                <span class="method-start">64 ms</span>
               </div> <!-- test-method -->
             </div> <!-- chronological-class -->
             <div class="chronological-class">
               <div class="chronological-class-name">test.java.PositiveTests</div> <!-- chronological-class-name -->
               <div class="test-method">
                 <span class="method-name">register</span>
-                <span class="method-start">11983 ms</span>
+                <span class="method-start">64 ms</span>
+              </div> <!-- test-method -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">test.java.NegativeTests</div> <!-- chronological-class-name -->
+              <div class="test-method">
+                <span class="method-name">incorrectPassword(222)</span>
+                <span class="method-start">65 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
+                <span class="method-name">incorrectPassword(111)</span>
+                <span class="method-start">13840 ms</span>
+              </div> <!-- test-method -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">test.java.PositiveTests</div> <!-- chronological-class-name -->
+              <div class="test-method">
+                <span class="method-name">contact</span>
+                <span class="method-start">14728 ms</span>
+              </div> <!-- test-method -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">test.java.NegativeTests</div> <!-- chronological-class-name -->
+              <div class="test-method">
+                <span class="method-name">responseTest</span>
+                <span class="method-start">22890 ms</span>
+              </div> <!-- test-method -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">test.java.PositiveTests</div> <!-- chronological-class-name -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
                 <span class="method-name">login</span>
-                <span class="method-start">18741 ms</span>
+                <span class="method-start">24070 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">requestLoad</span>
+                <span class="method-start">28400 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">responseTest</span>
+                <span class="method-start">33360 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
