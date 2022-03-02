@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite parallel="instances" name="Failed suite [AllTestsSuite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" parallel="instances" name="otherPassInParam(failed)">
+    <parameter name="password" value="222"/>
+    <classes>
+      <class name="test.java.NegativeTests">
+        <methods>
+          <include name="incorrectPassword" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- test.java.NegativeTests -->
+    </classes>
+  </test> <!-- otherPassInParam(failed) -->
+  <test thread-count="5" parallel="instances" name="negativeTests(failed)">
+    <parameter name="password" value="111"/>
+    <classes>
+      <class name="test.java.NegativeTests">
+        <methods>
+          <include name="incorrectPassword" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- test.java.NegativeTests -->
+    </classes>
+  </test> <!-- negativeTests(failed) -->
+</suite> <!-- Failed suite [AllTestsSuite] -->
