@@ -29,6 +29,13 @@
             <version>1.1.1</version>
         </dependency>
 
+        <!-- This is the Applitools Selenium for Java SDK -->
+        <dependency>
+            <groupId>com.applitools</groupId>
+            <artifactId>eyes-selenium-java3</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
     </dependencies>
 
 
