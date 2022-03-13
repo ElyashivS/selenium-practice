@@ -2,27 +2,33 @@
 
 <suite name="AllTestsSuite" parallel="tests" verbose="1">
 
-    <test name="PositiveTests">
-        <classes>
-            <class name="test.java.PositiveTests"/>
-        </classes>
-    </test>
+<!--    <test name="PositiveTests">-->
+<!--        <classes>-->
+<!--            <class name="test.java.PositiveTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="otherPassInParam">
-        <parameter name="password" value="222"/>
-        <classes>
-            <class name="test.java.NegativeTests">
-                <methods>
-                    <include name="incorrectPassword"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="otherPassInParam">-->
+<!--        <parameter name="password" value="222"/>-->
+<!--        <classes>-->
+<!--            <class name="test.java.NegativeTests">-->
+<!--                <methods>-->
+<!--                    <include name="incorrectPassword"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="negativeTests">
-        <parameter name="password" value="111"/>
+<!--    <test name="negativeTests">-->
+<!--        <parameter name="password" value="111"/>-->
+<!--        <classes>-->
+<!--            <class name="test.java.NegativeTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+    <test name="dockerTest" parallel="methods">
         <classes>
-            <class name="test.java.NegativeTests"/>
+            <class name="test.java.DockerTests"/>
         </classes>
     </test>
 
